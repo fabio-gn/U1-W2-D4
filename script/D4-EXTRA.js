@@ -5,6 +5,23 @@
  se il suo valore è maggiore di 5 o no.
  La funzione deve inoltre ritornare la somma di tutti i valori maggiori di 5.
 */
+const checkArray = function (howManyRandom) {
+  if (typeof howManyRandom !== "number") {
+    return "there was an error";
+  }
+  let randArray = giveMeRandom(parseInt(howManyRandom));
+  let sum = 0;
+  for (let i = 0; i < randArray.length; i++) {
+    if (randArray[i] > 5) {
+      console.log(randArray[i]);
+      sum += randArray[i];
+    }
+  }
+  return sum;
+};
+console.log(checkArray(5)); // prova con valore intero
+console.log(checkArray("pasta")); //prova con stringa non valida
+console.log(checkArray(7, 58)); // prova con valore float
 
 /* SCRIVI QUI LA TUA RISPOSTA */
 
@@ -14,14 +31,51 @@
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
-
+let shoppingCart = [
+    {
+        'price': 10,
+        'name': 'c-14',
+        'id': 1234,
+        'quantity': 2
+    },
+    {
+        'price': 5,
+        'name': 'c-14',
+        'id': 1234,
+        'quantity': 1
+    },
+    {
+        'price': 5,
+        'name': 'c-14',
+        'id': 1234,
+        'quantity': 3
+    },
+]
+const shoppingCartTotal = function(arrName){
+    let total = 0;
+    for(let i = 0; i < arrName.length; i++){
+        total += arrName[i].price * arrName[i].quantity;
+    }
+    return total;
+}
+console.log('totale carrello: ', shoppingCartTotal(shoppingCart));
 /* EXTRA 3
  Nel tuo eCommerce disponi di un'array di oggetti chiamato "shoppingCart". Ognuno di questi oggetti ha le seguenti proprietà: "price", "name", "id" e "quantity".
  Crea una funzione chiamata "addToShoppingCart" che riceve un nuovo oggetto dello stesso tipo, lo aggiunge a "shoppingCart" e ritorna il nuovo numero totale degli elementi.
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
-
+const addToShoppingCart = function(price, name, id, quantity){
+    shoppingCart.push({
+        'price': price,
+        'name': name,
+        'id': id,
+        'quantity': quantity,
+    });
+    return shoppingCart.length;
+}
+console.log('quantità oggetti: ', addToShoppingCart(10, 'frottoli', 1243, 1));
+console.log('carrello aggiornato: ', shoppingCart);
 /* EXTRA 4
  Nel tuo eCommerce disponi di un'array di oggetti chiamato "shoppingCart". Ognuno di questi oggetti ha le seguenti proprietà: "price", "name", "id" e "quantity".
  Crea una funzione chiamata "maxShoppingCart" che riceve l'array "shoppingCart" e ritorna l'oggetto più costoso in esso contenuto.
@@ -29,12 +83,47 @@
 
 /* SCRIVI QUI LA TUA RISPOSTA */
 
+const maxShoppingCart = ()=>{
+    // trascrivo i prezzi in priceArray
+    const pricesArray = [];
+    for (let i = 0; i < shoppingCart.length; i++) {
+        pricesArray.push(shoppingCart[i].price);
+    }
+    // confronto i prezzi per scoprire qual è il più grande
+    let biggest = 0;
+    for (let i = 0; i < pricesArray.length - 1; i++) {
+        switch (true) {
+            case pricesArray[i] > pricesArray[i + 1]:
+                biggest = pricesArray[i];
+                break;
+        
+            default:
+                biggest = pricesArray[i + 1] ;
+                break;
+        }
+    }
+    // gli oggetti di shoppingCart che hanno valore uguale a biggest vengono pushati in un'array
+    let priciestItems = []
+    for (let i = 0; i < shoppingCart.length; i++) {
+        if (shoppingCart[i].price === biggest){
+            priciestItems.push(shoppingCart[i]);
+        }
+    }
+    return priciestItems;
+}
+
+console.log('gli oggetti più cari sono: ', maxShoppingCart());
 /* EXTRA 5
  Nel tuo eCommerce disponi di un'array di oggetti chiamato "shoppingCart". Ognuno di questi oggetti ha le seguenti proprietà: "price", "name", "id" e "quantity".
  Crea una funzione chiamata "latestShoppingCart" che riceve l'array "shoppingCart" e ritorna l'ultimo elemento.
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+function latestShoppingCart(array){
+    return array[array.length-1]
+}
+
+console.log('l\'ultimo item è: ', latestShoppingCart(shoppingCart))
 
 /* EXTRA 6
  Crea una funzione chiamata "loopUntil" che riceve un numero intero come parametro con valore tra 0 e 9.
